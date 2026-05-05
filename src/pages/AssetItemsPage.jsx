@@ -25,6 +25,7 @@ const statusLabel = {
   broken: { text: "ชำรุด", color: theme.red, bg: theme.redBg },
   pending_sale: { text: "รอจำหน่าย", color: theme.orange, bg: theme.orangeBg },
   transferred: { text: "โอนย้าย", color: theme.blue, bg: theme.blueBg },
+  duplicate: { text: "⚠️ เลขซ้ำ", color: theme.blue, bg: theme.blueBg },
 };
 
 const emptyForm = {
@@ -182,7 +183,20 @@ export default function AssetItemsPage({ defaultTab = "all" }) {
   const fi = (key) => ({
     value: form[key] || "",
     onChange: (e) => setForm({ ...form, [key]: e.target.value }),
-    style: inputStyle,
+    style: {
+      ...inputStyle,
+      background:
+        form.status === "duplicate" && key === "remark" ? "#fff8f0" : "#fff",
+      cursor:
+        form.status === "duplicate" && key === "remark"
+          ? "not-allowed"
+          : "text",
+      color:
+        form.status === "duplicate" && key === "remark"
+          ? "#c62828"
+          : theme.textPrimary,
+    },
+    disabled: form.status === "duplicate" && key === "remark",
     onFocus: (e) => (e.target.style.borderColor = theme.primary),
     onBlur: (e) => (e.target.style.borderColor = theme.border),
   });
@@ -783,7 +797,7 @@ export default function AssetItemsPage({ defaultTab = "all" }) {
                 {[
                   "รหัสครุภัณฑ์",
                   "ชื่อครุภัณฑ์",
-                  "เลขซ้ำ",
+                  "เลขครุภัณฑ์หลัก",
                   "ผู้ถือครอง",
                   "หมายเหตุ",
                   "จัดการ",

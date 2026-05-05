@@ -7,7 +7,7 @@ const menu = [
   { path: "/categories", label: "หมวดหมู่", icon: "🗂️" },
   { path: "/users", label: "บุคลากร", icon: "👤" },
   { path: "/audit-logs", label: "บันทึกประวัติ", icon: "📋" },
-  { path: "/inspections", label: "ตรวจสอบประจำปี", icon: "🔍" },
+  //{ path: "/inspections", label: "ตรวจสอบประจำปี", icon: "🔍" },
 ];
 
 export default function Sidebar() {
